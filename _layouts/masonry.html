@@ -1,0 +1,27 @@
+---
+layout: "wrapper"
+---
+
+<script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const grid = document.querySelector('#masonry-grid');
+    
+    // 1. Initialize Masonry first
+    const msnry = new Masonry(grid, {
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      gutter: 16
+    });
+
+    // 2. Trigger layout updates as EACH image loads
+    const imgLoad = imagesLoaded(grid);
+    imgLoad.on('progress', function() {
+      msnry.layout();
+    });
+  });
+</script>
+
+{{content}}

@@ -1,0 +1,1047 @@
+---
+---
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
+
+
+
+
+
+:root {
+  --width: 1100px;
+  --font: "Outfit", sans-serif;
+  --font-scale: 1rem;
+	--background-color: #181A1B;
+	--heading-color: #749ea1;
+	--text-color: #dcdcdc;
+	--link-color: #E85D4D;
+	--visited-color: #a57650;
+	--blockquote-color: #dbbc97;
+}
+
+
+
+body {
+
+    font-family: var(--font);
+
+    font-size: var(--font-scale);
+
+  	font-weight: 500;
+
+    margin: auto;
+
+    padding: 20px;
+
+    max-width: var(--width);
+
+    text-align: justify;
+
+    background-color: var(--background-color);
+
+    word-wrap: normal;
+
+    overflow-wrap: break-word;
+
+    line-height: 1.7;
+
+    color: var(--text-color);
+
+}
+
+
+
+h1,
+
+h2,
+
+h3,
+
+h4,
+
+h5,
+
+h6 {
+
+    font-family: var(--font);
+
+    color: var(--heading-color);
+
+}
+
+
+
+a {
+
+    color: var(--link-color);
+
+    font-family: var(--font);
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+
+
+a:hover {
+
+    color: light-dark(black, white);
+
+    text-decoration: underline;
+
+}
+
+
+nav a {
+  	background-color: var(--link-color);
+    color: var(--background-color);
+    margin-right: 8px;
+ 	padding: 3px 7px;
+}
+
+
+
+strong,
+
+b {
+
+    color: var(--heading-color);
+
+}
+
+
+
+button {
+
+    margin: 0;
+
+    cursor: pointer;
+
+}
+
+
+
+main {
+
+    line-height: 1.6;
+
+}
+
+
+
+table {
+
+    width: 100%;
+
+}
+
+
+
+hr {
+
+    border: 0;
+
+    border-top: 1px dashed;
+
+}
+
+
+
+img {
+
+    max-width: 100%;
+
+}
+
+
+
+code {
+
+    font-family: monospace;
+
+    padding: 2px;
+
+    background-color: var(--code-background-color);
+
+    color: var(--code-color);
+
+    border-radius: 3px;
+
+}
+
+
+
+blockquote {
+
+    border-left: 3px solid var(--heading-color);
+
+    color: var(--code-color);
+
+    padding-left: 15px;
+
+    font-style: italic;
+
+  text-align: left;
+
+}
+
+
+
+footer {
+
+    margin-top: 40px;
+
+    padding: 25px 0;
+
+    text-align: center;
+
+}
+
+
+
+.title {
+
+    display: none;
+
+}
+
+
+
+.inline {
+
+    width: auto !important;
+
+}
+
+
+
+.highlight,
+
+.code {
+
+    padding: 1px 15px;
+
+    background-color: var(--code-background-color);
+
+    color: var(--code-color);
+
+    border-radius: 3px;
+
+    margin-block-start: 1em;
+
+    margin-block-end: 1em;
+
+    overflow-x: auto;
+
+}
+
+
+
+/* blog post list */
+
+ul.blog-posts {
+
+    list-style-type: none;
+
+    padding: unset;
+
+}
+
+
+
+ul.blog-posts li {
+
+    display: flex;
+
+    margin-bottom: 10px;
+
+}
+
+
+
+i time {
+
+  	font-family: var(--font);
+
+    font-style: normal;
+
+  	color: var(--visited-color);
+
+}
+
+
+
+ul.blog-posts li span {
+
+    flex: 0 0 130px;
+
+}
+
+
+
+table {
+
+    border-spacing: 0;
+
+}
+
+
+
+th,
+
+td {
+
+    padding: 6px 13px;
+
+    border: 1px solid #dfe2e5;
+
+    font-size: 1em;
+
+}
+
+
+
+/* ----------- Adjustment ----------- */
+
+
+
+.blog i time {
+
+  	color: var(--heading-color);
+
+}
+
+
+
+.blog a {
+
+  	text-align: left;
+
+}
+
+
+
+.post p img{
+
+  	display: block;
+
+  	width: 100%;
+
+    margin: 20px 0;
+
+}
+
+
+
+main p a{
+
+  	font-family: var(--font);
+
+}
+
+
+
+h1, li {
+
+  text-align: left;
+
+}
+
+
+
+nav a:hover {
+
+  color: var(--link-color);
+
+  background-color: var(--background-color);
+
+}
+
+
+
+nav {
+
+  position: relative;
+
+  line-height: 2;
+
+  text-align: left;
+
+}
+
+
+/* External link marker | robertbirming.com */
+
+main a[href^="http"]:not([href*="yuuya.bearblog.dev"])::after {
+
+  content: "\00a0↗\FE0E";
+
+  font-size: 0.7em;
+
+  text-decoration: none;
+
+  display: inline;
+
+  vertical-align: super;
+
+  white-space: nowrap;
+
+  color: var(--muted);
+
+}
+
+
+
+main a[href^="http"]:not([href*="yuuya.bearblog.dev"]):has(img)::after {
+
+  content: none;
+
+}
+
+
+
+/* Bearming gallery lightbox | robertbirming.com */
+
+
+
+.bearming-gallery {
+
+  margin-block: var(--space-block);
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+
+  gap: 0.6rem;
+
+}
+
+
+
+.bearming-gallery > p {
+
+  margin: 0;
+
+  display: contents;
+
+}
+
+
+
+.bearming-gallery a {
+
+  display: block;
+
+}
+
+
+
+/* Reset figure margin and hide caption in grid */
+
+
+
+.bearming-gallery figure {
+
+  margin: 0;
+
+}
+
+
+
+.bearming-gallery figcaption {
+
+  display: none;
+
+}
+
+
+
+/* Thumbnails */
+
+
+
+.bearming-gallery img {
+
+  display: block;
+
+  width: 100%;
+
+  height: auto;
+
+  margin: 0;
+
+  aspect-ratio: 1/1;
+
+  object-fit: contain;
+
+  cursor: pointer;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  transition: transform 0.15s ease;
+
+}
+
+
+
+@media (max-width: 526px){
+
+  .bearming-gallery img {
+
+    aspect-ratio: 1/1 auto;
+
+  }
+
+}
+
+
+
+@media (hover: hover) {
+
+  .bearming-gallery img:hover {
+
+    transform: scale(1.03);
+
+  }
+
+}
+
+
+
+.bearming-gallery img:focus-visible {
+
+  outline: 2px solid currentColor;
+
+  outline-offset: 3px;
+
+}
+
+
+
+/* Lightbox overlay */
+
+
+
+.bearming-gallery-lightbox {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 1.25rem;
+
+  background: rgba(0, 0, 0, 0.86);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 0.15s ease;
+
+}
+
+
+
+.bearming-gallery-lightbox.is-open {
+
+  opacity: 1;
+
+  pointer-events: auto;
+
+}
+
+
+
+/* Image and caption wrapper */
+
+
+
+.bearming-gallery-figure {
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  gap: 0.75rem;
+
+  margin: 0;
+
+}
+
+
+
+/* The large image */
+
+
+
+.bearming-gallery-figure img {
+
+  display: block;
+
+  max-width: min(100%, 68.75rem);
+
+  max-height: 82vh;
+
+  width: auto;
+
+  height: auto;
+
+  border-radius: calc(var(--radius) * 2);
+
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+
+  cursor: zoom-out;
+
+  image-rendering: auto;
+
+}
+
+
+
+/* Caption in lightbox */
+
+
+
+.bearming-gallery-caption {
+
+  color: rgba(255, 255, 255, 0.75);
+
+  font-size: var(--font-small, 0.9em);
+
+  font-style: italic;
+
+  text-align: center;
+
+  margin: 0;
+
+}
+
+
+
+.bearming-gallery-caption:empty {
+
+  display: none;
+
+}
+
+
+
+/* Shared button styles */
+
+
+
+.bearming-gallery-close,
+
+.bearming-gallery-prev,
+
+.bearming-gallery-next {
+
+  position: absolute;
+
+  padding: 0.35em 0.75em;
+
+  border-radius: 999px;
+
+  font: inherit;
+
+  font-size: var(--font-small);
+
+  line-height: 1.2;
+
+  color: #fff;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  border: 1px solid rgba(255, 255, 255, 0.35);
+
+  cursor: pointer;
+
+}
+
+
+
+@media (hover: hover) {
+
+  .bearming-gallery-close:hover,
+
+  .bearming-gallery-prev:hover,
+
+  .bearming-gallery-next:hover {
+
+    border-color: rgba(255, 255, 255, 0.6);
+
+    background: rgba(0, 0, 0, 0.7);
+
+  }
+
+}
+
+
+
+.bearming-gallery-close:focus,
+
+.bearming-gallery-prev:focus,
+
+.bearming-gallery-next:focus {
+
+  outline: none;
+
+}
+
+
+
+.bearming-gallery-close:focus-visible,
+
+.bearming-gallery-prev:focus-visible,
+
+.bearming-gallery-next:focus-visible {
+
+  border-color: rgba(255, 255, 255, 0.8);
+
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.22);
+
+}
+
+
+
+/* Button positions */
+
+
+
+.bearming-gallery-close {
+
+  inset-block-start: 0.9rem;
+
+  inset-inline-end: 0.9rem;
+
+}
+
+
+
+.bearming-gallery-prev {
+
+  inset-inline-start: 0.9rem;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+}
+
+
+
+.bearming-gallery-next {
+
+  inset-inline-end: 0.9rem;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+}
+
+
+
+/* Respect reduced motion */
+
+
+
+@media (prefers-reduced-motion: reduce) {
+
+  .bearming-gallery-lightbox,
+
+  .bearming-gallery img {
+
+    transition: none;
+
+  }
+
+}
+
+
+
+/* Blog helpers | robertbirming.com */
+
+.center {
+
+  text-align: center;
+
+  margin-inline: auto;
+
+}
+
+
+
+.meta {
+
+  font-size: var(--font-small);
+
+  color: var(--muted);
+
+}
+
+
+
+.small {
+
+  font-size: 0.85em;
+
+}
+
+
+
+.divider {
+
+  height: 1px;
+
+  margin-block: var(--space-block);
+
+  background: color-mix(in srgb, var(--text) 22%, transparent);
+
+}
+
+
+
+.short-divider {
+
+  width: 20rem;
+
+  height: 1px;
+
+  margin-block: var(--space-block);
+
+  margin-inline: auto;
+
+  background: color-mix(in srgb, var(--text) 22%, transparent);
+
+}
+
+
+
+.dots-divider {
+
+  text-align: center;
+
+  margin-block: var(--space-block);
+
+  color: var(--muted);
+
+  letter-spacing: 0.35em;
+
+}
+
+
+
+.dots-divider::before {
+
+  content: "• • •";
+
+}
+
+
+
+.note {
+
+  display: block;
+
+  padding-block: 1rem;
+
+  padding-inline: 1.2rem;
+
+  margin-block: var(--space-block);
+
+  font-size: var(--font-small);
+
+  border-inline-start: 1px solid color-mix(in srgb, var(--text) 22%, transparent);
+
+  background: color-mix(in srgb, var(--text) 4%, transparent);
+
+}
+
+
+
+.note > :first-child {
+
+  margin-block-start: 0;
+
+}
+
+
+
+.note > :last-child {
+
+  margin-block-end: 0;
+
+}
+
+
+
+/* Optional label inside note
+
+   Example: <span class="note-label">Note</span> */
+
+.note-label {
+
+  display: block;
+
+  font-weight: bold;
+
+  font-size: 0.8em;
+
+  text-transform: uppercase;
+
+  padding-block-end: 0.5em;
+
+  color: var(--muted);
+
+}
+
+
+
+.pullquote {
+
+  font-size: 1.35em;
+
+  line-height: 1.4;
+
+  text-align: center;
+
+  margin-block: var(--space-block);
+
+  padding-inline: 1em;
+
+  font-style: italic;
+
+}
+
+
+/* div class "status" */
+
+
+
+.status {
+  background-color: white;
+  border-radius: 0 20px 20px 0;
+  display: block;
+  padding: 10px 20px 5px 20px;
+  font-weight: normal;
+  font-family: var(--font);
+  margin: 20px 0 0 0;
+  color: #210706;
+  border-left: 8px var(--heading-color) solid;
+}
+
+.status img {
+  display: block;
+  width: 100%;
+  margin: auto;
+}
+
+
+
+@media only screen and (min-width: 700px){
+  .status img {
+    width: 70%;
+  }
+}
+
+header.time {
+   color: var(--link-color);
+   font-weight: 800;
+   border: none;
+}
+
+
+
+/* div class "rkgk"*/
+
+.rkgk {
+  display: block;
+  background-color: white;
+  border-radius: 15px;
+  padding: 10px 0;
+  font-weight: 800;
+  box-sizing: border-box;
+  margin: 20 0 0 0; /* Reset margins since JS handles spacing via absolute offsets */
+}
+
+
+.rkgk img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  object-fit: cover;
+  max-width: 100%;
+}
+
+.rkgk header {
+  padding-left: 20px;
+}
+
+
+/* Accordion */
+
+.summary {
+  background-color: var(--heading-color);
+  margin: 20px 0;
+  padding: 10px 30px;
+  color: var(--background-color);
+  cursor: pointer;
+  font-family: var(--font);
+  font-size: 1.2em;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.summary::-webkit-details-marker {
+  display: none; /* Removes arrow in Safari */
+}
+
+/* --- Masonry -- */
+
+/* Container padding */
+#masonry-grid {
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Base Card Styling */
+.grid-item {
+  width: calc(33.333% - 11px); /* 3 Columns on desktop */
+  margin-bottom: 16px;
+  box-sizing: border-box;
+}
+
+/* Ensure images scale inside cards without overflowing */
+.grid-item img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive Columns */
+@media (max-width: 900px) {
+  .grid-item {
+    width: calc(50% - 8px); /* 2 Columns on tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .grid-item {
+    width: 100%; /* 1 Column on mobile */
+  }
+}
