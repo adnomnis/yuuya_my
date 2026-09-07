@@ -3,14 +3,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
 
-@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
-
-
-
-
-
 :root {
-  --width: 1100px;
   --font: "Outfit", sans-serif;
   --font-scale: 1rem;
 	--background-color: #181A1B;
@@ -19,393 +12,114 @@
 	--link-color: #E85D4D;
 	--visited-color: #a57650;
 	--blockquote-color: #dbbc97;
+  --width: 1000px;
 }
-
-
 
 body {
-
     font-family: var(--font);
-
     font-size: var(--font-scale);
-
   	font-weight: 500;
-
     margin: auto;
-
     padding: 20px;
-
     max-width: var(--width);
-
     text-align: justify;
-
     background-color: var(--background-color);
-
     word-wrap: normal;
-
     overflow-wrap: break-word;
-
-    line-height: 1.7;
-
+    line-height: 1.4;
     color: var(--text-color);
-
+    animation: fadeIn 1s ease-out forwards;
 }
 
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px); 
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
-
-h1,
-
-h2,
-
-h3,
-
-h4,
-
-h5,
-
-h6 {
-
-    font-family: var(--font);
-
+h1, h2, h3, h4, h5, h6 {
     color: var(--heading-color);
-
 }
-
-
 
 a {
-
     color: var(--link-color);
-
     font-family: var(--font);
-
     cursor: pointer;
-
     text-decoration: none;
-
 }
-
-
 
 a:hover {
-
     color: light-dark(black, white);
-
     text-decoration: underline;
-
 }
 
+nav {
+  position: relative;
+  line-height: 2;
+  text-align: left;
+  margin-bottom: 20px;
+}
 
 nav a {
   	background-color: var(--link-color);
     color: var(--background-color);
     margin-right: 8px;
- 	padding: 3px 7px;
+ 	  padding: 3px 7px;
 }
 
+nav a:hover {
+  color: var(--link-color);
+  background-color: var(--background-color);
+}
 
-
-strong,
-
-b {
-
+strong, b {
     color: var(--heading-color);
-
 }
-
-
-
-button {
-
-    margin: 0;
-
-    cursor: pointer;
-
-}
-
-
-
-main {
-
-    line-height: 1.6;
-
-}
-
-
-
-table {
-
-    width: 100%;
-
-}
-
-
 
 hr {
-
     border: 0;
-
     border-top: 1px dashed;
-
 }
-
 
 
 img {
-
     max-width: 100%;
-
 }
-
-
-
-code {
-
-    font-family: monospace;
-
-    padding: 2px;
-
-    background-color: var(--code-background-color);
-
-    color: var(--code-color);
-
-    border-radius: 3px;
-
-}
-
-
 
 blockquote {
-
     border-left: 3px solid var(--heading-color);
-
     color: var(--code-color);
-
     padding-left: 15px;
-
     font-style: italic;
-
   text-align: left;
-
 }
-
-
 
 footer {
-
     margin-top: 40px;
-
     padding: 25px 0;
-
     text-align: center;
-
 }
-
-
-
-.title {
-
-    display: none;
-
-}
-
-
 
 .inline {
-
     width: auto !important;
-
 }
 
-
-
-.highlight,
-
-.code {
-
-    padding: 1px 15px;
-
-    background-color: var(--code-background-color);
-
-    color: var(--code-color);
-
-    border-radius: 3px;
-
-    margin-block-start: 1em;
-
-    margin-block-end: 1em;
-
-    overflow-x: auto;
-
-}
-
-
-
-/* blog post list */
-
-ul.blog-posts {
-
-    list-style-type: none;
-
-    padding: unset;
-
-}
-
-
-
-ul.blog-posts li {
-
-    display: flex;
-
-    margin-bottom: 10px;
-
-}
-
-
-
-i time {
-
-  	font-family: var(--font);
-
-    font-style: normal;
-
-  	color: var(--visited-color);
-
-}
-
-
-
-ul.blog-posts li span {
-
-    flex: 0 0 130px;
-
-}
-
-
-
-table {
-
-    border-spacing: 0;
-
-}
-
-
-
-th,
-
-td {
-
+th, td {
     padding: 6px 13px;
-
     border: 1px solid #dfe2e5;
-
     font-size: 1em;
-
 }
-
-
-
-/* ----------- Adjustment ----------- */
-
-
-
-.blog i time {
-
-  	color: var(--heading-color);
-
-}
-
-
-
-.blog a {
-
-  	text-align: left;
-
-}
-
-
-
-.post p img{
-
-  	display: block;
-
-  	width: 100%;
-
-    margin: 20px 0;
-
-}
-
-
-
-main p a{
-
-  	font-family: var(--font);
-
-}
-
-
 
 h1, li {
-
   text-align: left;
-
 }
-
-
-
-nav a:hover {
-
-  color: var(--link-color);
-
-  background-color: var(--background-color);
-
-}
-
-
-
-nav {
-
-  position: relative;
-
-  line-height: 2;
-
-  text-align: left;
-
-}
-
-
-/* External link marker | robertbirming.com */
-
-main a[href^="http"]:not([href*="yuuya.bearblog.dev"])::after {
-
-  content: "\00a0↗\FE0E";
-
-  font-size: 0.7em;
-
-  text-decoration: none;
-
-  display: inline;
-
-  vertical-align: super;
-
-  white-space: nowrap;
-
-  color: var(--muted);
-
-}
-
-
-
-main a[href^="http"]:not([href*="yuuya.bearblog.dev"]):has(img)::after {
-
-  content: none;
-
-}
-
-
 
 /* Bearming gallery lightbox | robertbirming.com */
-
 
 
 .bearming-gallery {
@@ -976,7 +690,6 @@ header.time {
   padding: 10px 0;
   font-weight: 800;
   box-sizing: border-box;
-  margin: 20 0 0 0; /* Reset margins since JS handles spacing via absolute offsets */
 }
 
 
