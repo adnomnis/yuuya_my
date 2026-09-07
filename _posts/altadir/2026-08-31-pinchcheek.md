@@ -2,4 +2,4 @@
 tag: "altadir"
 ---
 
-![a](https://i.ibb.co.com/fG8pRgWd/pinchcheek.jpg)
+![a](/assets/img/altadir/pinchcheek.jpg)
