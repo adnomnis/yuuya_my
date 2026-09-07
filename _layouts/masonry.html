@@ -5,23 +5,86 @@ layout: "wrapper"
 <script src="https://unpkg.com/imagesloaded@5/imagesloaded.pkgd.min.js"></script>
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
+<style>
+  /* Hide posts initially beyond the current batch */
+  .grid-item.is-hidden {
+    display: none !important;
+  }
+
+  .load-more-container {
+    text-align: center;
+    margin: 3rem 0;
+  }
+
+  #load-more-btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
+</style>
+
+{{ content }}
+
+<div class="load-more-container">
+  <button id="load-more-btn" type="button" style="background-color: var(--heading-color); font-family: var(--font); border-radius: 20px; border: 1px solid var(--heading-color); 15px; font-weight: 600;">Show More</button>
+</div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function() {
+    const INITIAL_COUNT = 10;
+    const BATCH_SIZE = 20;
+
     const grid = document.querySelector('#masonry-grid');
-    
-    // 1. Initialize Masonry first
+    const loadMoreBtn = document.getElementById('load-more-btn');
+    const allItems = Array.from(grid.querySelectorAll('.grid-item'));
+
+    if (!allItems.length) {
+      if (loadMoreBtn) loadMoreBtn.style.display = 'none';
+      return;
+    }
+
+    grid.querySelectorAll('img').forEach(img => {
+      img.setAttribute('loading', 'lazy');
+    });
+
+    allItems.forEach((item, index) => {
+      if (index >= INITIAL_COUNT) {
+        item.classList.add('is-hidden');
+      }
+    });
+
+    if (allItems.length <= INITIAL_COUNT) {
+      loadMoreBtn.style.display = 'none';
+    }
+
     const msnry = new Masonry(grid, {
-      itemSelector: '.grid-item',
+      itemSelector: '.grid-item:not(.is-hidden)',
       percentPosition: true,
       gutter: 16
     });
 
-    // 2. Trigger layout updates as EACH image loads
-    const imgLoad = imagesLoaded(grid);
-    imgLoad.on('progress', function() {
+    imagesLoaded(grid).on('progress', function() {
       msnry.layout();
+    });
+
+    let currentVisibleCount = INITIAL_COUNT;
+
+    loadMoreBtn.addEventListener('click', function() {
+      const nextBatch = allItems.slice(currentVisibleCount, currentVisibleCount + BATCH_SIZE);
+
+      nextBatch.forEach(item => item.classList.remove('is-hidden'));
+
+      msnry.appended(nextBatch);
+
+      imagesLoaded(nextBatch, function() {
+        msnry.layout();
+      });
+
+      currentVisibleCount += nextBatch.length;
+
+      if (currentVisibleCount >= allItems.length) {
+        loadMoreBtn.style.display = 'none';
+      }
     });
   });
 </script>
-
-{{content}}
