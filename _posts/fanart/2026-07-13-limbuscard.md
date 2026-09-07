@@ -2,5 +2,5 @@
 tag: "fanart"
 ---
 
-![a](\assets\img\fanart\IMG_20260713_192922.jpg)
-![a](\assets\img\fanart\IMG_20260713_194201.jpg)
+![a](https://i.ibb.co.com/pBbsGG9g/IMG-20260713-192922.jpg)
+![a](https://i.ibb.co.com/tPpdQxGR/IMG-20260713-194201.jpg)
