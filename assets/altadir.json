@@ -1,0 +1,17 @@
+---
+permalink: /altadir.json
+---
+{% assign altadir_posts = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.tag contains "altadir" %}
+    {% assign altadir_posts = altadir_posts | push: post %}
+  {% endif %}
+{% endfor %}
+[
+  {% for post in altadir_posts %}
+    {
+      "date": {{ post.date | date: site.date_format | jsonify }},
+      "content": {{ post.content | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

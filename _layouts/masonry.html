@@ -6,17 +6,12 @@ layout: "wrapper"
 <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
 <style>
-  /* Hide posts initially beyond the current batch */
-  .grid-item.is-hidden {
-    display: none !important;
-  }
-
   .load-more-container {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 3rem 0;
-    min-height: 50px; /* Keeps container height stable */
+    min-height: 50px;
   }
 
   #load-more-btn {
@@ -28,6 +23,11 @@ layout: "wrapper"
     padding: 10px 24px;
     cursor: pointer;
   }
+
+  #load-more-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 </style>
 
 {{ content }}
@@ -38,30 +38,23 @@ layout: "wrapper"
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {
-    const INITIAL_COUNT = 10;
-    const BATCH_SIZE = 20;
-
+    const BATCH_SIZE = 10;
     const grid = document.querySelector('#masonry-grid');
     const loadMoreBtn = document.getElementById('load-more-btn');
-    const allItems = Array.from(grid.querySelectorAll('.grid-item'));
 
-    if (!allItems.length) {
-      if (loadMoreBtn) loadMoreBtn.style.display = 'none';
-      return;
-    }
+    if (!grid || !loadMoreBtn) return;
 
-    allItems.forEach((item, index) => {
-      if (index >= INITIAL_COUNT) {
-        item.classList.add('is-hidden');
-      }
-    });
+    const totalPosts = parseInt(grid.dataset.total || "0", 10);
+    let currentIndex = parseInt(grid.dataset.initial || "10", 10);
+    let cachedJson = null;
 
-    if (allItems.length <= INITIAL_COUNT) {
+    // Hide button immediately if total items <= initial load
+    if (totalPosts <= currentIndex) {
       loadMoreBtn.style.display = 'none';
     }
 
     const msnry = new Masonry(grid, {
-      itemSelector: '.grid-item:not(.is-hidden)',
+      itemSelector: '.grid-item',
       percentPosition: true,
       gutter: 16
     });
@@ -70,22 +63,57 @@ layout: "wrapper"
       msnry.layout();
     });
 
-    let currentVisibleCount = INITIAL_COUNT;
-    loadMoreBtn.addEventListener('click', function() {
-      const nextBatch = allItems.slice(currentVisibleCount, currentVisibleCount + BATCH_SIZE);
+    loadMoreBtn.addEventListener('click', async function() {
+      loadMoreBtn.disabled = true;
+      loadMoreBtn.textContent = 'Loading...';
 
-      nextBatch.forEach(item => item.classList.remove('is-hidden'));
+      try {
+        // Fetch JSON endpoint once on first click and cache in memory
+        if (!cachedJson) {
+          const res = await fetch('{{ "/fanart.json" | relative_url }}');
+          if (!res.ok) throw new Error('Failed to fetch fanart JSON');
+          cachedJson = await res.json();
+        }
 
-      msnry.appended(nextBatch);
+        const nextBatch = cachedJson.slice(currentIndex, currentIndex + BATCH_SIZE);
+        if (!nextBatch.length) {
+          loadMoreBtn.style.display = 'none';
+          return;
+        }
 
-      imagesLoaded(nextBatch, function() {
-        msnry.layout();
-      });
+        const fragment = document.createDocumentFragment();
+        const newNodes = [];
 
-      currentVisibleCount += nextBatch.length;
+        nextBatch.forEach(post => {
+          const item = document.createElement('div');
+          item.className = 'grid-item rkgk';
+          item.innerHTML = `
+            <header class="time">${post.date}</header>
+            <div class="post-content">${post.content}</div>
+          `;
+          fragment.appendChild(item);
+          newNodes.push(item);
+        });
 
-      if (currentVisibleCount >= allItems.length) {
-        loadMoreBtn.style.display = 'none';
+        grid.appendChild(fragment);
+        msnry.appended(newNodes);
+
+        imagesLoaded(newNodes, function() {
+          msnry.layout();
+        });
+
+        currentIndex += nextBatch.length;
+
+        if (currentIndex >= cachedJson.length) {
+          loadMoreBtn.style.display = 'none';
+        } else {
+          loadMoreBtn.textContent = 'Show More';
+          loadMoreBtn.disabled = false;
+        }
+      } catch (err) {
+        console.error(err);
+        loadMoreBtn.textContent = 'Failed to load';
+        loadMoreBtn.disabled = false;
       }
     });
   });

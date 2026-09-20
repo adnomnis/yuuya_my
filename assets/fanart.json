@@ -1,0 +1,17 @@
+---
+permalink: /fanart.json
+---
+{% assign fanart_posts = "" | split: "" %}
+{% for post in site.posts %}
+  {% if post.tag contains "fanart" %}
+    {% assign fanart_posts = fanart_posts | push: post %}
+  {% endif %}
+{% endfor %}
+[
+  {% for post in fanart_posts %}
+    {
+      "date": {{ post.date | date: site.date_format | jsonify }},
+      "content": {{ post.content | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]
