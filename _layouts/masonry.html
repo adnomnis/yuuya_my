@@ -48,7 +48,8 @@ layout: "wrapper"
     let currentIndex = parseInt(grid.dataset.initial || "10", 10);
     let cachedJson = null;
 
-    // Hide button immediately if total items <= initial load
+    const jsonUrl = grid.dataset.json || '{{ page.json_url | default: "/fanart.json" | relative_url }}';
+
     if (totalPosts <= currentIndex) {
       loadMoreBtn.style.display = 'none';
     }
@@ -63,15 +64,27 @@ layout: "wrapper"
       msnry.layout();
     });
 
+    // Preloads images for a DOM element sequentially to prevent out-of-order pop-in
+    async function preloadImages(container) {
+      const imgs = Array.from(container.querySelectorAll('img'));
+      for (const img of imgs) {
+        if (img.complete) continue;
+        await new Promise((resolve) => {
+          const temp = new Image();
+          temp.onload = temp.onerror = resolve; // Continue even if an image breaks
+          temp.src = img.src;
+        });
+      }
+    }
+
     loadMoreBtn.addEventListener('click', async function() {
       loadMoreBtn.disabled = true;
       loadMoreBtn.textContent = 'Loading...';
 
       try {
-        // Fetch JSON endpoint once on first click and cache in memory
         if (!cachedJson) {
-          const res = await fetch('{{ "/fanart.json" | relative_url }}');
-          if (!res.ok) throw new Error('Failed to fetch fanart JSON');
+          const res = await fetch(jsonUrl);
+          if (!res.ok) throw new Error(`Failed to fetch JSON from ${jsonUrl}`);
           cachedJson = await res.json();
         }
 
@@ -81,26 +94,23 @@ layout: "wrapper"
           return;
         }
 
-        const fragment = document.createDocumentFragment();
-        const newNodes = [];
-
-        nextBatch.forEach(post => {
+        // Process sequentially: 1st -> 2nd -> ... -> 10th
+        for (const post of nextBatch) {
           const item = document.createElement('div');
-          item.className = 'grid-item rkgk';
+          item.className = post.class ? `grid-item rkgk ${post.class}` : 'grid-item rkgk';
           item.innerHTML = `
             <header class="time">${post.date}</header>
             <div class="post-content">${post.content}</div>
           `;
-          fragment.appendChild(item);
-          newNodes.push(item);
-        });
 
-        grid.appendChild(fragment);
-        msnry.appended(newNodes);
+          // Force browser to fetch and decode this post's images before rendering
+          await preloadImages(item);
 
-        imagesLoaded(newNodes, function() {
+          // Append and position item by item in exact array order
+          grid.appendChild(item);
+          msnry.appended([item]);
           msnry.layout();
-        });
+        }
 
         currentIndex += nextBatch.length;
 
