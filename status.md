@@ -1,5 +1,6 @@
 ---
 layout: wrapper
+permalink: status
 ---
 
 {% for post in site.posts %}

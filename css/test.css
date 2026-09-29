@@ -53,11 +53,6 @@ a {
     text-decoration: none;
 }
 
-a:hover {
-    color: light-dark(black, white);
-    text-decoration: underline;
-}
-
 nav {
   position: relative;
   line-height: 2;
@@ -645,8 +640,6 @@ h1, li {
 
 /* div class "status" */
 
-
-
 .status {
   background-color: white;
   border-radius: 0 20px 20px 0;
@@ -665,8 +658,6 @@ h1, li {
   margin: auto;
 }
 
-
-
 @media only screen and (min-width: 700px){
   .status img {
     width: 70%;
@@ -678,8 +669,6 @@ header.time {
    font-weight: 800;
    border: none;
 }
-
-
 
 /* div class "rkgk"*/
 
@@ -726,35 +715,92 @@ header.time {
 
 /* --- Masonry -- */
 
-/* Container padding */
 #masonry-grid {
   width: 100%;
   margin: 0 auto;
 }
 
-/* Base Card Styling */
 .grid-item {
   width: calc(33.333% - 11px); /* 3 Columns on desktop */
   margin-bottom: 16px;
   box-sizing: border-box;
 }
 
-/* Ensure images scale inside cards without overflowing */
 .grid-item img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Responsive Columns */
 @media (max-width: 900px) {
   .grid-item {
-    width: calc(50% - 8px); /* 2 Columns on tablets */
+    width: calc(50% - 8px); 
   }
 }
 
 @media (max-width: 600px) {
   .grid-item {
-    width: 100%; /* 1 Column on mobile */
+    width: 100%; 
   }
+}
+
+/* -- index (bukan Prescript) -- */
+.indexWrap {
+  background-color: white;
+  border-radius: 20px;
+  display: block;
+  padding: 10px;
+  font-weight: normal;
+  font-family: var(--font);
+  margin: auto;
+  color: #210706;
+  margin-bottom: 20px;
+}
+
+.indexWrap p {
+  display: block;
+  margin: 0 25px;
+  border-left: 5px var(--heading-color) solid;
+  padding: 10px;
+}
+
+.indexWrap h2 {
+  margin: 8px 20px;
+}
+
+.linkBtn {
+  background-color: var(--heading-color);
+  display: flex;
+  color: white;
+  padding: 10px 20px;
+  width: calc(33% - 10px);
+  margin: 10px;
+  border-radius: 10px;
+}
+
+.linkBtn:hover{
+  background-color: var(--link-color);
+}
+
+.buttonWrap {
+  display: flex;
+  justify-content: space-between;
+}
+
+.indexh1 {
+  font-weight: 900;
+  color: var(--link-color);
+  text-align: center;
+  margin: 20px;
+}
+
+.blogArrow {
+  display: block;
+  font-weight: 700;
+  font-size: 1.5em;
+  margin: 0 20px;
+}
+
+.blogArrow:hover{
+  text-decoration: underline;
 }
