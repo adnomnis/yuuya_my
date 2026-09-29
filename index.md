@@ -6,7 +6,7 @@ layout: index
 <h1 class="indexh1">Yuuya</h1>
 
 <div class="buttonWrap">
-    <a class="linkBtn" href="https://adnomnis.tumblr.com/">Tumblr</a> <a class="linkBtn" href="https://x.com/adnomnis/">Twitter</a> <a class="linkBtn" href="https://toyhou.se/adnomnis (WIP)">Toyhouse (WIP)</a>
+    <a class="linkBtn" href="https://adnomnis.tumblr.com/">Tumblr</a> <a class="linkBtn" href="https://x.com/adnomnis/">Twitter</a> <a class="linkBtn" href="https://toyhou.se/adnomnis">Toyhouse (WIP)</a>
 </div>
 </div>
 
